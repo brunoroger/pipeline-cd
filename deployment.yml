@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pipeline-cd
+  labels:
+    app: pipeline-cd
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: pipeline-cd
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: pipeline-cd
+  labels:
+    app: pipeline-cd
+spec:
+  selector:
+    matchLabels:
+      app: pipeline-cd
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: pipeline-cd
+        tier: frontend
+    spec:
+      containers:
+      - image: gcr.io/cloud-student-246202/pipeline-cd:a9da0d38252201d491d4383c14cbe70ebcea83d8
+        name: pipeline-cd
+        ports:
+        - containerPort: 3000
+          name: pipeline-cd
