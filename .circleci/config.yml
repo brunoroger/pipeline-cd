@@ -3,20 +3,20 @@ jobs:
   build:
     docker:
       - image: wecs/circle-ci-gcloud-node:0.1.0
-      working_directory: ~/workspace
-      environment:
-        DEPLOYMENT_NAME: pipeline-cd
-        PROJECT_ID: cloud-student-246202
-        CLUSTER_NAME: production
-        CLUSTER_NAME_STAG: production-stag
-        CLOUDSDK_COMPUTE_ZONE: us-central1-a
-        CONTAINER_NAME: pipeline-cd
-        IMAGE: pipeline-cd
-        REG_ID: pipeline-cd
-        REG_ID_PROD: pipeline-cd-prod
-        IMG_TAG: 0.1.0
-        PROJECT_NAME: pipeline-cd
-        DEPLOYMENT_ENVIRONMENT: staging
+    working_directory: ~/workspace
+    environment:
+      DEPLOYMENT_NAME: pipeline-cd
+      PROJECT_ID: cloud-student-246202
+      CLUSTER_NAME: production
+      CLUSTER_NAME_STAG: production-stag
+      CLOUDSDK_COMPUTE_ZONE: us-central1-a
+      CONTAINER_NAME: pipeline-cd
+      IMAGE: pipeline-cd
+      REG_ID: pipeline-cd
+      REG_ID_PROD: pipeline-cd-prod
+      IMG_TAG: 0.1.0
+      PROJECT_NAME: pipeline-cd
+      DEPLOYMENT_ENVIRONMENT: staging
     steps:
       - checkout
       - restore_cache:
