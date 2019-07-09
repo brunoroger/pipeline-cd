@@ -8,4 +8,6 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
+EXPOSE 80
+
 CMD serve -p 80 -s build

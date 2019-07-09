@@ -35,5 +35,5 @@ spec:
       - image: gcr.io/cloud-student-246202/pipeline-cd:a9da0d38252201d491d4383c14cbe70ebcea83d8
         name: pipeline-cd
         ports:
-        - containerPort: 3000
+        - containerPort: 80
           name: pipeline-cd
