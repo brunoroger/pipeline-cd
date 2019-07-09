@@ -20,7 +20,7 @@ gcloud --quiet container clusters get-credentials $CLUSTER_NAME
 
 # service docker start
 
-docker build . -t gcr.io/${PROJECT_ID}/${REG_ID}:$CIRCLE_SHA1
+docker build -t gcr.io/${PROJECT_ID}/${REG_ID}:$CIRCLE_SHA1 .
 
 gcloud docker --push gcr.io/${PROJECT_ID}/${REG_ID}:$CIRCLE_SHA1
 
