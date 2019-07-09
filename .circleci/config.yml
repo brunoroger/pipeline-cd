@@ -1,9 +1,22 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/redux-async
     docker:
-      - image: circleci/node:8
+      - image: wecs/circle-ci-gcloud-node:0.1.0
+      working_directory: ~/workspace
+      environment:
+        DEPLOYMENT_NAME: pipeline-cd
+        PROJECT_ID: cloud-student-246202
+        CLUSTER_NAME: production
+        CLUSTER_NAME_STAG: production-stag
+        CLOUDSDK_COMPUTE_ZONE: us-central1-a
+        CONTAINER_NAME: pipeline-cd
+        IMAGE: pipeline-cd
+        REG_ID: pipeline-cd
+        REG_ID_PROD: pipeline-cd-prod
+        IMG_TAG: 0.1.0
+        PROJECT_NAME: pipeline-cd
+        DEPLOYMENT_ENVIRONMENT: staging
     steps:
       - checkout
       - restore_cache:
@@ -18,3 +31,9 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+      - run:
+          name: Build and Deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              ./deployment.sh
+            fi
