@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    inline_example/my_inline_job:
+      name: mybuild
     docker:
       - image: wecs/circle-ci-gcloud-node:0.1.0
     working_directory: ~/workspace
@@ -20,8 +22,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - inline_example/my_inline_job:
-          name: mybuild
       - run:
           name: Build and Deploy
           command: |
